@@ -1,3 +1,15 @@
+# v1.7.0 (Fri Aug 23 2024)
+
+#### 🚀 Enhancement
+
+- Update Dependencies and Adjust `onChange` Handling [#8](https://github.com/selsa-inube/inubekit-yearpicker/pull/8) ([@cmarin001](https://github.com/cmarin001))
+
+#### Authors: 1
+
+- Cesar Marin Alfonso ([@cmarin001](https://github.com/cmarin001))
+
+---
+
 # v1.6.0 (Wed Aug 21 2024)
 
 #### 🚀 Enhancement
