@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { IYearpicker, Yearpicker } from "..";
 
 const YearpickerController = (props: IYearpicker) => {
@@ -10,14 +10,18 @@ const YearpickerController = (props: IYearpicker) => {
     placeholder,
     value = "",
   } = props;
+
   const [selectedYear, setSelectedYear] = useState<string>(value);
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    newValue: string,
-  ) => {
+  useEffect(() => {
+    setSelectedYear(value);
+  }, [value]);
+
+  const handleChange = (name: string, newValue: string) => {
     setSelectedYear(newValue);
-    onChange && onChange(event, newValue);
+    if (onChange) {
+      onChange(name, newValue);
+    }
   };
 
   return (
