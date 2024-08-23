@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Select } from "@inubekit/select";
 import { IYearpickerOrder } from "./props";
 
@@ -6,7 +6,7 @@ interface IYearpicker {
   start?: number;
   end?: number;
   order?: IYearpickerOrder;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void;
+  onChange: (name: string, value: string) => void;
   placeholder?: string;
   value?: string;
 }
@@ -21,7 +21,9 @@ const Yearpicker = (props: IYearpicker) => {
     value = "",
   } = props;
 
-  const [years, setYears] = useState<string[]>([]);
+  const [years, setYears] = useState<
+    { id: string; label: string; value: string }[]
+  >([]);
 
   useEffect(() => {
     let yearList = Array.from({ length: end - start + 1 }, (_, i) =>
@@ -30,19 +32,23 @@ const Yearpicker = (props: IYearpicker) => {
     if (order === "asc") {
       yearList = yearList.reverse();
     }
-    setYears(yearList);
+    setYears(
+      yearList.map((year) => ({
+        id: year,
+        label: year,
+        value: year,
+      })),
+    );
   }, [start, end, order]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event, event.target.innerText);
+  const handleChange = (name: string, value: string) => {
+    onChange(name, value);
   };
 
   return (
     <Select
-      options={years.map((year) => ({
-        id: year,
-        label: year,
-      }))}
+      name="year"
+      options={years}
       onChange={handleChange}
       placeholder={placeholder}
       value={value}
